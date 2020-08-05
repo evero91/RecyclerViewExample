@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final List<String> deudas = new ArrayList<>();
-        deudas.add("UNO");
-        deudas.add("DOS");
-        deudas.add("TRES");
+        final List<String[]> deudas = new ArrayList<>();
+        deudas.add(new String[]{"UNO", String.valueOf(R.drawable.uno)});
+        deudas.add(new String[]{"DOS", String.valueOf(R.drawable.dos)});
+        deudas.add(new String[]{"TRES", String.valueOf(R.drawable.tres)});
 
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -29,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
         deudasAdapter.setListener(new DeudasAdapter.Listener() {
             @Override
             public void onClick(int position) {
-                Log.d("Deuda", String.valueOf(position) + " " + deudas.get(position));
+                Log.d("Deuda", String.valueOf(position) + " deuda " + deudas.get(position)[0]);
+            }
+        });
+        deudasAdapter.setListenerImagen(new DeudasAdapter.Listener() {
+            @Override
+            public void onClick(int position) {
+                Log.d("Deuda", String.valueOf(position) + " imagen " + deudas.get(position)[1]);
             }
         });
         recyclerView.setAdapter(deudasAdapter);
